@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <link rel="stylesheet" href="/vendors/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/vendors/open-iconic/font/css/open-iconic-bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/fragments/navigation_bar.css"/>
+    <link rel="stylesheet" href="/stylesheets/components/notifier.css"/>
+    <link rel="stylesheet" href="/stylesheets/components/object_mosaic.css"/>
+    <link rel="stylesheet" href="/stylesheets/components/upload_zone.css"/>
+    <link rel="stylesheet" href="/stylesheets/admin_objects.css"/>
+
+    <title>Image Search Engine</title>
+</head>
+<body>
+
+<nav th:replace="fragments/navigation_bar :: navigation_bar(currentPage = 'admin_objects')"></nav>
+
+<div id="notifications_container">
+    <div id="notifications"></div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>New objects</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div id="new_object_upload_zone"></div>
+
+            <div id="new-objects-to-complete">
+                <div id="registration_finalization_header">
+                    <div id="registration_finalization_header_message">
+                        Please set a proper name for the following objects in order to finalize their registration:
+                    </div>
+                    <button type="button" id="registration_finalization_header_add_all" class="btn btn-primary"
+                            title="Add all valid objects">
+                        Add all
+                    </button>
+                </div>
+                <div id="unfinalized_object_mosaic"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h2>Registered objects</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div id="existing_object_mosaic"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="add_all_modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add all valid objects</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="add_all_modal_confirmation_message">
+                        Add <span id="add_all_modal_nb_addable_objects">0</span> object(s)?
+                    </div>
+                    <div id="add_all_modal_no_valid_object">
+                        Unfortunately there is no valid object to add.
+                    </div>
+                    <div id="add_all_modal_processing">
+                        <div>Adding objects...</div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                 id="add_all_modal_progress_bar"
+                                 role="progressbar"
+                                 style="width: 0%;"
+                                 aria-valuenow="0"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100">
+                                0/0 (0%)
+                            </div>
+                        </div>
+                    </div>
+                    <div id="add_all_modal_done">
+                        All objects have been added!
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="add_all_modal_cancel" class="btn btn-secondary" data-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="button" id="add_all_modal_confirm" class="btn btn-primary">Confirm</button>
+                    <button type="button" id="add_all_modal_ok" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script src="/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendors/lodash/lodash.min.js"></script>
+<script src="/scripts/model/RecognizableObject.js"></script>
+<script src="/scripts/services/imageService.js"></script>
+<script src="/scripts/services/objectService.js"></script>
+<script src="/scripts/components/Notifier.js"></script>
+<script src="/scripts/components/ObjectMosaic.js"></script>
+<script src="/scripts/components/UploadZone.js"></script>
+<script src="/scripts/controllers/adminObjectsController.js"></script>
+
+</body>
+</html>

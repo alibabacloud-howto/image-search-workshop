@@ -1,0 +1,18 @@
+[Unit]
+Description=web-image-search-engine
+After=syslog.target
+After=network.target[Service]
+
+[Service]
+User=webimagesearchengine
+ExecStart=/usr/bin/java -Xmx1024m -jar /opt/web-image-search-engine/web-image-search-engine.jar
+SuccessExitStatus=143
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=webimagesearchengine
+
+[Install]
+WantedBy=multi-user.target

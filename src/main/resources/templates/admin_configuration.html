@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!--
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <link rel="stylesheet" href="/vendors/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/vendors/open-iconic/font/css/open-iconic-bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/fragments/navigation_bar.css"/>
+    <link rel="stylesheet" href="/stylesheets/components/notifier.css"/>
+    <link rel="stylesheet" href="/stylesheets/components/object_mosaic.css"/>
+    <link rel="stylesheet" href="/stylesheets/admin_configuration.css"/>
+    <title>Image Search Engine</title>
+</head>
+<body>
+<nav th:replace="fragments/navigation_bar :: navigation_bar(currentPage = 'admin_configuration')"></nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>Configuration information</h2>
+            <form>
+                <div class="form-group">
+                    <label for="password">Administration password</label>
+                    <input type="password" class="form-control" id="password"/>
+                    <small class="form-text text-muted">
+                        Password to protect this page.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="passwordConfirmation">Administration password confirmation</label>
+                    <input type="password" class="form-control" id="passwordConfirmation"/>
+                    <small class="form-text text-muted">
+                        Please enter the same password to confirm.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="accessKeyId">Access key ID</label>
+                    <input type="text" class="form-control" id="accessKeyId"/>
+                    <small class="form-text text-muted">
+                        You can get an access key from the Alibaba Cloud console by clicking in the menu
+                        "profile_picture"/accesskeys (on the screen top-right).
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="accessKeySecret">Access key secret</label>
+                    <input type="text" class="form-control" id="accessKeySecret"/>
+                    <small class="form-text text-muted">
+                        Access key password.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="regionID">Region ID</label>
+                    <input type="text" class="form-control" id="regionID"/>
+                    <small class="form-text text-muted">
+                        Region where you setup your product search instance (e.g. "ap-southeast-1").
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="imageSearchInstanceName">Product search instance name</label>
+                    <input type="text" class="form-control" id="imageSearchInstanceName"/>
+                    <small class="form-text text-muted">
+                        Name of your product search instance.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="imageSearchDomain">Product search instance domain</label>
+                    <input type="text" class="form-control" id="imageSearchDomain"/>
+                    <small class="form-text text-muted">
+                        Domain of your product search instance (e.g. "imagesearch.ap-southeast-1.aliyuncs.com").
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="imageSearchNamespace">Product search instance namespace</label>
+                    <input type="text" class="form-control" id="imageSearchNamespace"/>
+                    <small class="form-text text-muted">
+                        Unique name that allow several applications to share the same product search instance (e.g.
+                        "mydemo123").
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="imageSearchNamespace">OSS Base image URL</label>
+                    <input type="text" class="form-control" id="ossBaseUrl"/>
+                    <small class="form-text text-muted">
+                        The base url of OSS which the image is uploaded).
+                    </small>
+                </div>
+                <div class="form-group" id="buttons">
+                    <button type="button" class="btn btn-primary" id="check_configuration">Check</button>
+                    <button type="button" class="btn btn-primary" id="save_configuration">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="server-response-modal" tabindex="-1" role="dialog"
+     aria-labelledby="server-response-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="server-response-modal-label">Server response</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body" id="server-response-modal-message"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="authentication-modal" tabindex="-1" role="dialog"
+     aria-labelledby="authentication-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="authentication-modal-label">Please enter your password</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="authentication-modal-password">Administration password</label>
+                    <input type="password" class="form-control" id="authentication-modal-password"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="authentication-modal-submit">Authenticate</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="loading_panel">
+    <img src="/images/loading.gif"/>
+</div>
+
+<script src="/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script src="/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendors/lodash/lodash.min.js"></script>
+<script src="/scripts/model/Configuration.js"></script>
+<script src="/scripts/services/configurationService.js"></script>
+<script src="/scripts/components/Notifier.js"></script>
+<script src="/scripts/components/ObjectMosaic.js"></script>
+<script src="/scripts/controllers/adminConfigurationController.js"></script>
+</body>
+</html>

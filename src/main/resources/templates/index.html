@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+
+    <link rel="stylesheet" href="/vendors/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/vendors/open-iconic/font/css/open-iconic-bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/fragments/navigation_bar.css"/>
+    <link rel="stylesheet" href="/stylesheets/components/notifier.css"/>
+    <link rel="stylesheet" href="/stylesheets/components/object_mosaic.css"/>
+    <link rel="stylesheet" href="/stylesheets/components/upload_zone.css"/>
+    <link rel="stylesheet" href="/stylesheets/index.css"/>
+
+    <title>Image Search Engine</title>
+</head>
+<body>
+
+<nav th:replace="fragments/navigation_bar :: navigation_bar(currentPage = 'home')"></nav>
+
+<div id="upload_zone_container">
+    <div id="notifications"></div>
+    <div id="similar_image_upload_zone"></div>
+
+    <div class="container">
+        <div class="row mt-3">
+            <div id="uploaded-image-container" class="col-md-12 position-relative">
+                <img id="uploaded-image" class="mx-auto border" src="/images/loading.gif"/>
+                <div id="uploaded-image-overlay-top" class="uploaded-image-overlay"></div>
+                <div id="uploaded-image-overlay-bottom" class="uploaded-image-overlay"></div>
+                <div id="uploaded-image-overlay-left" class="uploaded-image-overlay"></div>
+                <div id="uploaded-image-overlay-right" class="uploaded-image-overlay"></div>
+                <div id="uploaded-image-overlay-handle-top-left">
+                    <div class="uploaded-image-overlay-handle-cube"></div>
+                </div>
+                <div id="uploaded-image-overlay-handle-bottom-right">
+                    <div class="uploaded-image-overlay-handle-cube"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-md-center mt-3">
+            <div class="col-md-2 mb-3">
+                <button id="new-search-button" type="button" class="btn btn-primary w-100">
+                    New Search
+                </button>
+            </div>
+            <div class="col-md-2 mb-3">
+                <button id="search-selection-button" type="button" class="btn btn-primary w-100" disabled="disabled">
+                    Search selection
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="found_objects_container">
+    <div class="row">
+        <div class="col-md-10 mb-3">
+            <h2><span id="nb_objects_found"></span> object(s) found</h2>
+        </div>
+        <div class="col-md-2 mb-3">
+            <button class="btn btn-primary" id="view_raw_btn">
+                View raw response
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div id="found_object_mosaic"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="view-raw-modal" tabindex="-1" role="dialog"
+     aria-labelledby="view-raw-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="view-raw-modal-label">View raw response</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <pre id="view-raw-modal-content"></pre>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="view-raw-modal-submit" data-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="loading_overlay">
+    <img src="/images/loading.gif"/>
+</div>
+
+<script src="/vendors/jquery/jquery-3.3.1.min.js"></script>
+<script src="/vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendors/lodash/lodash.min.js"></script>
+<script src="/vendors/draggabilly/dist/draggabilly.pkgd.min.js"></script>
+<script src="/scripts/model/RecognizableObject.js"></script>
+<script src="/scripts/model/ObjectWithScore.js"></script>
+<script src="/scripts/model/ObjectRegion.js"></script>
+<script src="/scripts/services/imageService.js"></script>
+<script src="/scripts/services/objectService.js"></script>
+<script src="/scripts/components/Notifier.js"></script>
+<script src="/scripts/components/ObjectMosaic.js"></script>
+<script src="/scripts/components/UploadZone.js"></script>
+<script src="/scripts/controllers/indexController.js"></script>
+</body>
+</html>

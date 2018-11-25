@@ -1,0 +1,116 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+#upload_zone_container {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.upload_zone_container_compact {
+    display: block !important;
+    flex: inherit !important;
+    margin: auto !important;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+#similar_image_upload_zone {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#uploaded-image {
+    display: none;
+    max-height: 300px;
+    max-width: 100%;
+}
+
+.uploaded-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#uploaded-image-overlay-handle-top-left, #uploaded-image-overlay-handle-bottom-right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+}
+
+.uploaded-image-overlay-handle-cube {
+    display: none;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 10px;
+    height: 10px;
+    background-color: #333;
+}
+
+#new-search-button, #search-selection-button {
+    display: none;
+}
+
+#found_objects_container {
+    display: none;
+}
+
+#loading_overlay {
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+#notifications {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 100000;
+}
+
+#view-raw-modal > .modal-dialog {
+    max-width: 90%;
+}
+
+#view_raw_btn {
+    width: 100%;
+    margin-bottom: 8px;
+}
