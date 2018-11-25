@@ -1,4 +1,4 @@
-# Image Search Demo
+# Image Search Workshop
 
 ## Introduction
 
