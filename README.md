@@ -31,12 +31,10 @@ If you plan to use other category you have to manually recompile it and change t
 [Link to the categories](https://www.alibabacloud.com/help/doc-detail/66623.html)
 
 In order to change the default category you need to edit one file called [ImageSearchServiceImpl.java](https://github.com/wojciehm/Alibaba-Cloud-Image-Search-Demo/blob/master/src/main/java/com/alibaba/intl/imagesearch/services/impl/ImageSearchServiceImpl.java)
-<br>at line 95 from `request.setCatId(category.getId());`
-
-to
+at line 95 from `request.setCatId(category.getId());` to
 `request.setCatId(category.DIGITAL_DEVICES.getId());`
 
-and line 162
+Line 162
 from
 `// request.setCatId(ObjectCategory.FURNITURE.getId()); `
 
