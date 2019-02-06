@@ -178,7 +178,7 @@ can be used for sorting results.
 - [SHOES](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-bags.noarch.rpm)
 - [ACCESSORIES](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-accessories.noarch.rpm)
 - [SNACKS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-snacks.noarch.rpm)
-- [MAKEUP](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-makup.noarch.rpm)
+- [MAKEUP](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-makeup.noarch.rpm)
 - [BOTTLE_DRINKS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-bottle-drinks.noarch.rpm)
 - [FURNITURE](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-furniture.noarch.rpm)
 - [TOYS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-toys.noarch.rpm)
