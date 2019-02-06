@@ -113,7 +113,10 @@ If you want to automatically run the server when the machine starts, enter the f
 
     systemctl enable web-image-search-engine.service
 
-## Usage
+## Demo configuration
+
+### Image Search instance creation
+
 Before running the application, you first need to create a "Product Search instance":
 * Go to [https://www.alibabacloud.com/](https://www.alibabacloud.com/), login (or create an account) and go to the
   web console.
@@ -125,10 +128,12 @@ Before running the application, you first need to create a "Product Search insta
 
 Open your web browser on the following URL: http://your_server_address:8080/
 
-If this is the first time you use the application, you will be redirected to the configuration page: enter the
-access key and "Product Search instance" details.
+### Image Search demo configuration
 
-For example
+If this is the first time you use the application, you will be redirected to the configuration page.
+
+1.
+
 
 Once configured, using this web application is pretty straightforward:
 1. Go to the "Manage objects" page: it displays all the sample products registered in the database. You can add, modify
@@ -142,9 +147,64 @@ the demo source code). This is a limitation of this API, and there is no simple 
 score doesn't help (unless you search with the exact same picture as a registered object), only its relative value
 can be used for sorting results.
 
+## Pre-compiled rpms:
+- TOPS
+- DRESSES
+- BOTTOMS
+- BAGS
+- SHOES
+- ACCESSORIES
+- SNACKS
+- MAKEUP
+- BOTTLE_DRINKS
+- FURNITURE
+- TOYS
+- UNDERWEARS
+- DIGITAL_DEVICES
+- OTHERS
+
+## Ready to copy&paste CentOS commands to execute install
+
+- TOPS
+
+- DRESSES
+- BOTTOMS
+- BAGS
+- SHOES
+- ACCESSORIES
+- SNACKS
+- MAKEUP
+- BOTTLE_DRINKS
+- FURNITURE
+#### TOYS
+```
+yum -y update
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-toys.noarch.rpm
+yum -y install web-image-search-engine-toys.noarch.rpm
+systemctl start web-image-search-engine.service
+systemctl enable web-image-search-engine.service
+```
+#### UNDERWEARS
+```
+yum -y update
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-underwears.noarch.rpm
+yum -y install web-image-search-engine-underwears.noarch.rpm
+systemctl start web-image-search-engine.service
+systemctl enable web-image-search-engine.service
+```
+#### DIGITAL_DEVICES
+```
+yum -y update
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-digital-devices.noarch.rpm
+yum -y install web-image-search-engine-digital-devices.noarch.rpm
+systemctl start web-image-search-engine.service
+systemctl enable web-image-search-engine.service
+```
+- OTHERS
+
 There are few solutions for this problem:
 * Have a huge database of images, like [Taobao](https://www.taobao.com/).
-* Teach the Image Search API to recognize bad results: for example if the customer only sells furniture, then
+* Teach the Image Search API to recognize bad results. <br>For example if the customer only sells furniture, then
   non-furniture objects should also be registered in the database and marked as "BAD", like this the program can filter
   the Image Search results by removing the BAD objects.
 
