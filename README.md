@@ -1,4 +1,4 @@
-# Image Search Workshop
+# Alibaba Cloud Image Search Demo
 
 ## Introduction
 
@@ -9,10 +9,44 @@ The demo is a website compatible with desktop computers and smartphones. It cont
 * A management page where a user can creates/updates/deletes products in the database.
 * A search page that lets users to find products that look similar to an uploaded photo. The picture can come from a
   JPEG file or directly from a camera when the user views this page on a smartphone.
-  
+
+## Change the default category
+
+By default Image Search use **88888888** category which is **Others**.
+If you plan to use other category you have to manually recompile it and change the code.
+
+[Link to the categories](https://www.alibabacloud.com/help/doc-detail/66623.html)
+
+In order to change the default category you need to edit one file called [ImageSearchServiceImpl.java](https://github.com/wojciehm/Alibaba-Cloud-Image-Search-Demo/blob/master/src/main/java/com/alibaba/intl/imagesearch/services/impl/ImageSearchServiceImpl.java) at line 95.
+
+from `request.setCatId(category.getId());`
+
+to
+`request.setCatId(category.DIGITAL_DEVICES.getId());`
+
+or any needed category ID.
+
+|Category ID|Description|
+|--- |--- |
+|0|Tops|
+|1|Dresses|
+|2|Bottoms|
+|3|Bags|
+|4|Shoes|
+|5|Accessories|
+|6|Snacks|
+|7|Makeup|
+|8|Bottle drinks|
+|9|Furniture|
+|20|Toys|
+|21|Underwears|
+|22|Digital devices|
+|88888888|Others|
+
+###
 ## Build
 Clone the project, open a terminal and type:
-                 
+
     mvn clean install
 
 This generates the fat JAR "target/web-image-search-engine.jar".
@@ -23,7 +57,7 @@ If you plan to install this demo on a RPM-based Linux distribution, you can type
 
 This generates the package "target/rpm/web-image-search-engine/RPMS/noarch/web-image-search-engine-*.noarch.rpm".
 The RPM contains the fat JAR and a Systemd script. It allows users to easily execute the server when the machine
-starts. It also automatically restarts the application after a crash. 
+starts. It also automatically restarts the application after a crash.
 
 ## Installation and execution
 If you just want to run the fat JAR, open a terminal and run:
@@ -49,7 +83,7 @@ You can check the logs by running the following command:
 The server should start and listen to the port 8080. If you prefer to use the port 80, you can setup a reverse proxy
 such as [Nginx](https://www.linode.com/docs/development/java/how-to-deploy-spring-boot-applications-nginx-ubuntu-16-04/#reverse-proxy).
 
-If you want to automatically run the server when the machine starts, enter the following command: 
+If you want to automatically run the server when the machine starts, enter the following command:
 
     sudo systemctl enable web-image-search-engine.service
 
