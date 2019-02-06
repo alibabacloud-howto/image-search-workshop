@@ -165,17 +165,86 @@ can be used for sorting results.
 
 ## Ready to copy&paste CentOS commands to execute install
 
-- TOPS
-
-- DRESSES
-- BOTTOMS
-- BAGS
-- SHOES
-- ACCESSORIES
-- SNACKS
-- MAKEUP
-- BOTTLE_DRINKS
-- FURNITURE
+#### TOPS
+```
+yum -y update
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-tops.noarch.rpm
+yum -y install web-image-search-tops.noarch.rpm
+systemctl start web-image-search-engine.service
+systemctl enable web-image-search-engine.service
+```
+#### DRESSES
+```
+yum -y update
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-dresses.noarch.rpm
+yum -y install web-image-search-dresses.noarch.rpm
+systemctl start web-image-search-engine.service
+systemctl enable web-image-search-engine.service
+```
+#### BOTTOMS
+```
+yum -y update
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-bottoms.noarch.rpm
+yum -y install web-image-search-bottoms.noarch.rpm
+systemctl start web-image-search-engine.service
+systemctl enable web-image-search-engine.service
+```
+#### BAGS
+```
+yum -y update
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-bags.noarch.rpm
+yum -y install web-image-search-bags.noarch.rpm
+systemctl start web-image-search-engine.service
+systemctl enable web-image-search-engine.service
+```
+#### SHOES
+```
+yum -y update
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-shoes.noarch.rpm
+yum -y install web-image-search-shoes.noarch.rpm
+systemctl start web-image-search-engine.service
+systemctl enable web-image-search-engine.service
+```
+#### ACCESSORIES
+```
+yum -y update
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-accessories.noarch.rpm
+yum -y install web-image-search-accessories.noarch.rpm
+systemctl start web-image-search-engine.service
+systemctl enable web-image-search-engine.service
+```
+#### SNACKS
+```
+yum -y update
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-snacks.noarch.rpm
+yum -y install web-image-search-snacks.noarch.rpm
+systemctl start web-image-search-engine.service
+systemctl enable web-image-search-engine.service
+```
+#### MAKEUP
+```
+yum -y update
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-makeup.noarch.rpm
+yum -y install web-image-search-makeup.noarch.rpm
+systemctl start web-image-search-engine.service
+systemctl enable web-image-search-engine.service
+```
+#### BOTTLE_DRINKS
+```
+yum -y update
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-bottle-drinks.noarch.rpm
+yum -y install web-image-search-bottle-drinks.noarch.rpm
+systemctl start web-image-search-engine.service
+systemctl enable web-image-search-engine.service
+```
+#### FURNITURE
+```
+yum -y update
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-furniture.noarch.rpm
+yum -y install web-image-search-furniture.noarch.rpm
+systemctl start web-image-search-engine.service
+systemctl enable web-image-search-engine.service
+```
 #### TOYS
 ```
 yum -y update
@@ -200,7 +269,14 @@ yum -y install web-image-search-engine-digital-devices.noarch.rpm
 systemctl start web-image-search-engine.service
 systemctl enable web-image-search-engine.service
 ```
-- OTHERS
+#### OTHERS
+```
+yum -y update
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-others.noarch.rpm
+yum -y install web-image-search-engine-others.noarch.rpm
+systemctl start web-image-search-engine.service
+systemctl enable web-image-search-engine.service
+```
 
 There are few solutions for this problem:
 * Have a huge database of images, like [Taobao](https://www.taobao.com/).
