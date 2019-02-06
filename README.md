@@ -171,20 +171,20 @@ score doesn't help (unless you search with the exact same picture as a registere
 can be used for sorting results.
 
 ## Pre-compiled rpms:
-- [TOPS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-tops.noarch.rpm)
-- [DRESSES](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-dresses.noarch.rpm)
-- [BOTTOMS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-bottoms.noarch.rpm)
-- [BAGS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-bags.noarch.rpm)
-- [SHOES](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-bags.noarch.rpm)
-- [ACCESSORIES](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-accessories.noarch.rpm)
-- [SNACKS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-snacks.noarch.rpm)
-- [MAKEUP](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-makup.noarch.rpm)
-- [BOTTLE_DRINKS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-bottle-drinks.noarch.rpm)
-- [FURNITURE](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-furniture.noarch.rpm)
-- [TOYS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-toys.noarch.rpm)
-- [UNDERWEARS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-underwears.noarch.rpm)
-- [DIGITAL_DEVICES](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-digital-devices.noarch.rpm)
-- [OTHERS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-others.noarch.rpm)
+- [TOPS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-tops.noarch.rpm)
+- [DRESSES](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-dresses.noarch.rpm)
+- [BOTTOMS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-bottoms.noarch.rpm)
+- [BAGS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-bags.noarch.rpm)
+- [SHOES](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-bags.noarch.rpm)
+- [ACCESSORIES](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-accessories.noarch.rpm)
+- [SNACKS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-snacks.noarch.rpm)
+- [MAKEUP](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-makup.noarch.rpm)
+- [BOTTLE_DRINKS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-bottle-drinks.noarch.rpm)
+- [FURNITURE](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-furniture.noarch.rpm)
+- [TOYS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-toys.noarch.rpm)
+- [UNDERWEARS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-underwears.noarch.rpm)
+- [DIGITAL_DEVICES](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-digital-devices.noarch.rpm)
+- [OTHERS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-others.noarch.rpm)
 
 ## Ready to copy&paste CentOS commands to execute install
 
