@@ -191,47 +191,47 @@ can be used for sorting results.
 #### TOPS
 ```
 yum -y update
-wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-tops.noarch.rpm
-yum -y install web-image-search-tops.noarch.rpm
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-tops.noarch.rpm
+yum -y install web-image-search-engine-tops.noarch.rpm
 systemctl start web-image-search-engine.service
 systemctl enable web-image-search-engine.service
 ```
 #### DRESSES
 ```
 yum -y update
-wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-dresses.noarch.rpm
-yum -y install web-image-search-dresses.noarch.rpm
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-dresses.noarch.rpm
+yum -y install web-image-search-engine-dresses.noarch.rpm
 systemctl start web-image-search-engine.service
 systemctl enable web-image-search-engine.service
 ```
 #### BOTTOMS
 ```
 yum -y update
-wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-bottoms.noarch.rpm
-yum -y install web-image-search-bottoms.noarch.rpm
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-bottoms.noarch.rpm
+yum -y install web-image-search-engine-bottoms.noarch.rpm
 systemctl start web-image-search-engine.service
 systemctl enable web-image-search-engine.service
 ```
 #### BAGS
 ```
 yum -y update
-wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-bags.noarch.rpm
-yum -y install web-image-search-bags.noarch.rpm
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-bags.noarch.rpm
+yum -y install web-image-search-engine-bags.noarch.rpm
 systemctl start web-image-search-engine.service
 systemctl enable web-image-search-engine.service
 ```
 #### SHOES
 ```
 yum -y update
-wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-shoes.noarch.rpm
-yum -y install web-image-search-shoes.noarch.rpm
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-shoes.noarch.rpm
+yum -y install web-image-search-engine-shoes.noarch.rpm
 systemctl start web-image-search-engine.service
 systemctl enable web-image-search-engine.service
 ```
 #### ACCESSORIES
 ```
 yum -y update
-wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-accessories.noarch.rpm
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-accessories.noarch.rpm
 yum -y install web-image-search-accessories.noarch.rpm
 systemctl start web-image-search-engine.service
 systemctl enable web-image-search-engine.service
@@ -239,32 +239,32 @@ systemctl enable web-image-search-engine.service
 #### SNACKS
 ```
 yum -y update
-wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-snacks.noarch.rpm
-yum -y install web-image-search-snacks.noarch.rpm
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-snacks.noarch.rpm
+yum -y install web-image-search-engine-snacks.noarch.rpm
 systemctl start web-image-search-engine.service
 systemctl enable web-image-search-engine.service
 ```
 #### MAKEUP
 ```
 yum -y update
-wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-makeup.noarch.rpm
-yum -y install web-image-search-makeup.noarch.rpm
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-makeup.noarch.rpm
+yum -y install web-image-search-engine-makeup.noarch.rpm
 systemctl start web-image-search-engine.service
 systemctl enable web-image-search-engine.service
 ```
 #### BOTTLE_DRINKS
 ```
 yum -y update
-wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-bottle-drinks.noarch.rpm
-yum -y install web-image-search-bottle-drinks.noarch.rpm
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-bottle-drinks.noarch.rpm
+yum -y install web-image-search-engine-bottle-drinks.noarch.rpm
 systemctl start web-image-search-engine.service
 systemctl enable web-image-search-engine.service
 ```
 #### FURNITURE
 ```
 yum -y update
-wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-furniture.noarch.rpm
-yum -y install web-image-search-furniture.noarch.rpm
+wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-furniture.noarch.rpm
+yum -y install web-image-search-engine-furniture.noarch.rpm
 systemctl start web-image-search-engine.service
 systemctl enable web-image-search-engine.service
 ```
