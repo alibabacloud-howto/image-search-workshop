@@ -12,7 +12,6 @@
        * [Image Search demo configuration](#image-search-demo-configuration)
     * [Pre-compiled rpms:](#pre-compiled-rpms)
     * [Ready to copy&amp;paste CentOS commands to execute install](#ready-to-copypaste-centos-commands-to-execute-install)
-    * [Thanks](#thanks)
 
 ## Introduction
 
@@ -177,7 +176,7 @@ can be used for sorting results.
 - [BOTTOMS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-bottoms.noarch.rpm)
 - [BAGS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-bags.noarch.rpm)
 - [SHOES](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-bags.noarch.rpm)
-- [ACCESSORIES](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-accesssories.noarch.rpm)
+- [ACCESSORIES](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-accessories.noarch.rpm)
 - [SNACKS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-snacks.noarch.rpm)
 - [MAKEUP](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-makup.noarch.rpm)
 - [BOTTLE_DRINKS](https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-bottle-drinks.noarch.rpm)
