@@ -132,7 +132,7 @@ Open your web browser on the following URL: http://your_server_address:8080/
 
 If this is the first time you use the application, you will be redirected to the configuration page.
 
-![Image Search empty page](images/Image Search empty page.png)
+![Image Search empty page](images/ImageSearchemptypage.png)
 1. Enter Administrator password twice to protect configuration page.
 2. Provide AccessKeyID.
 3. Provide AccessKeySecret.
@@ -142,7 +142,7 @@ If you don't know the regionID you can check all regionID's [Alibaba Cloud Regio
 6. Enter product search instance domain. Similiar to regionID your Image Search instance domain will be: **imagesearch**.**regionID**.aliyuncs.com.
 7. If you wish you can enter product search instance namespace. This might help you to distinguish different images in the same Image Search instance.
 
-![Image Search admin page configured](images/Image Search admin configured page.png)
+![Image Search admin page configured](images/ImageSearchadminconfiguredpage.png)
 
 
 Once configured, using this web application is pretty straightforward:
