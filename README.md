@@ -12,7 +12,7 @@ The demo is a website compatible with desktop computers and smartphones. It cont
 
 ## Change the default category
 
-By default Image Search use **88888888** category which is **Others**.
+By default Image Search use **88888888** category which is **OTHERS**.
 If you plan to use other category you have to manually recompile it and change the code.
 
 [Link to the categories](https://www.alibabacloud.com/help/doc-detail/66623.html)
@@ -24,26 +24,49 @@ from `request.setCatId(category.getId());`
 to
 `request.setCatId(category.DIGITAL_DEVICES.getId());`
 
+and line 162
+from
+`// request.setCatId(ObjectCategory.FURNITURE.getId()); `
+
+to
+`request.setCatId(ObjectCategory.DIGITAL_DEVICES.getId());`
+
 or any needed category ID.
 
 |Category ID|Description|
 |--- |--- |
-|0|Tops|
-|1|Dresses|
-|2|Bottoms|
-|3|Bags|
-|4|Shoes|
-|5|Accessories|
-|6|Snacks|
-|7|Makeup|
-|8|Bottle drinks|
-|9|Furniture|
-|20|Toys|
-|21|Underwears|
-|22|Digital devices|
-|88888888|Others|
+|0|TOPS|
+|1|DRESSES|
+|2|BOTTOMS|
+|3|BAGS|
+|4|SHOES|
+|5|ACCESSORIES|
+|6|SNACKS|
+|7|MAKEUP|
+|8|BOTTLE_DRINKS|
+|9|FURNITURE|
+|20|TOYS|
+|21|UNDERWEARS|
+|22|DIGITAL_DEVICES|
+|88888888|OTHERS|
 
-###
+### Compile the code on macOS
+
+I am using macOS Mojave and brew to install maven. The installation is very simple and works out of the box.
+
+1. Install brew on macOS [Brew on macOS](https://brew.sh/)
+2. Install maven using brew:
+```shell
+brew update
+brew install maven      
+brew cleanup  
+```
+3. Install rpm using brew
+```shell
+brew install rpm
+```
+4. Once installed you can proceed with the build.
+
 ## Build
 Clone the project, open a terminal and type:
 
@@ -56,6 +79,7 @@ If you plan to install this demo on a RPM-based Linux distribution, you can type
     mvn rpm:rpm
 
 This generates the package "target/rpm/web-image-search-engine/RPMS/noarch/web-image-search-engine-*.noarch.rpm".
+
 The RPM contains the fat JAR and a Systemd script. It allows users to easily execute the server when the machine
 starts. It also automatically restarts the application after a crash.
 
@@ -66,26 +90,28 @@ If you just want to run the fat JAR, open a terminal and run:
 
 This starts the server on the port 8080 and outputs the logs in the console.
 
+### RPM based Linux distribution Installation
+
 If you are using a RPM-based Linux distribution, such as CentOS 7.4+, you can install the RPM with the following
 commands:
 
-    sudo yum -y update
-    sudo yum -y install path/to/web-image-search-engine-latest.noarch.rpm
+    yum -y update
+    yum -y install web-image-search-engine-latest.noarch.rpm
 
 You can start the server with the following command:
 
-    sudo systemctl start web-image-search-engine.service
+    systemctl start web-image-search-engine.service
 
 You can check the logs by running the following command:
 
-    sudo journalctl --unit=web-image-search-engine
+    journalctl --unit=web-image-search-engine
 
 The server should start and listen to the port 8080. If you prefer to use the port 80, you can setup a reverse proxy
 such as [Nginx](https://www.linode.com/docs/development/java/how-to-deploy-spring-boot-applications-nginx-ubuntu-16-04/#reverse-proxy).
 
 If you want to automatically run the server when the machine starts, enter the following command:
 
-    sudo systemctl enable web-image-search-engine.service
+    systemctl enable web-image-search-engine.service
 
 ## Usage
 Before running the application, you first need to create a "Product Search instance":
@@ -101,6 +127,8 @@ Open your web browser on the following URL: http://your_server_address:8080/
 
 If this is the first time you use the application, you will be redirected to the configuration page: enter the
 access key and "Product Search instance" details.
+
+For example
 
 Once configured, using this web application is pretty straightforward:
 1. Go to the "Manage objects" page: it displays all the sample products registered in the database. You can add, modify
