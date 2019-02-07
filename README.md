@@ -229,7 +229,7 @@ systemctl enable web-image-search-engine.service
 ```
 yum -y update
 wget https://imagesearchrpm.oss-ap-southeast-1.aliyuncs.com/web-image-search-engine-accessories.noarch.rpm
-yum -y install web-image-search-accessories.noarch.rpm
+yum -y install web-image-search-engine-accessories.noarch.rpm
 systemctl start web-image-search-engine.service
 systemctl enable web-image-search-engine.service
 ```
