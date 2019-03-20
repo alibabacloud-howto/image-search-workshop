@@ -3,8 +3,8 @@
 ## Summary
 0. [Introduction](#introduction)
 1. [Prerequisite](#prerequisite)
-2. [How to use](#how-to-use)
-3. [Run as a linux deamon](#run-as-a-linux-deamon)
+2. [Usage](#usage)
+3. [Run as a linux daemon](#run-as-a-linux-daemon)
 4. [Tips](#tips)
 5. [Online demo page](#online-demo-page)
 6. [Thanks](#thanks)
@@ -82,15 +82,14 @@ sudo alternatives --config java
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 ```
 
-## How to use
-
-1. Set up
+## Usage
+1. Build the demo
 
     Run the following commands.
 
-    ```
+    ```bash
     # Change directory if needed
-    cd /path/to/your/directory
+    cd /path/to/your/projects
 
     # Clone the project
     git clone https://github.com/alibabacloud-howto/image-search-workshop.git
@@ -99,23 +98,24 @@ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
     mvn clean install
 
     # Run the project
-    java -jar target/web-image-search-engine.jar
+    mvn spring-boot:run
     ```
 
-    Ofcourse, you can use IDE (e.g. IntelliJ IDEA) to import, build and run this project.
-    For tips, you can use the following command just to build the project.
-    ```
+    Of course, you can use an IDE (e.g. IntelliJ IDEA) to import, build and run this project.
+    
+    > Note: you can use the following command to only build the project (skip tests):
+    ```bash
     mvn package -Dmaven.test.skip=true
     ```
 
-2. Try it!
+2. Try the demo
 
-    1. Configure
-        * Open your web browser and access http://localhost:8080/
+    1. Configure the demo
+        * Open your web browser and access to "http://localhost:8080/".
         * If this is the first time you use the application, you will be redirected to the configuration page.
-        * Enter your access key and "Product Search instance" details.
+        * Enter your access key and "Product Search instance" details (you can ignore "OSS Base image URL").
 
-    2. Access the *Manage objects* page
+    2. Access to the *Manage objects* page
         * You can add/update/delete products here.
         * It displays all the sample products registered in the database.
 
@@ -123,9 +123,7 @@ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
         * You can upload an image and see the image search result here.
         * If you have added enough products, you should always see 20 results with various scores.
 
-
-## Run as a linux deamon
-
+## Run as a linux daemon
 1. Create a RPM package
 
     If you plan to install this demo on a RPM-based Linux distribution, you can type the following command:
