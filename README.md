@@ -33,43 +33,47 @@ There are two databases: one for storing names & images of registered objects, a
 features required for searches). Both databases are synchronized via object UUIDs.
 
 ## Prerequisite
-
 ### Product Search instance
-Before running the application, you first need to create a *Product Search instance* as an image search API server on Alibaba Cloud.
+Before running the application, you first need to create a
+[Product Search instance](https://www.alibabacloud.com/help/doc-detail/66569.htm) that will allow you to use the
+[image search API](https://www.alibabacloud.com/help/doc-detail/66616.htm):
 
 0. Create an Alibaba cloud account
 
-    You need an Alibaba cloud account. If you don't have any account, you can access [https://www.alibabacloud.com/](https://www.alibabacloud.com/) and create a new account.
+    If you don't have an account, please follow
+    [this document to create one](https://www.alibabacloud.com/help/doc-detail/50482.htm).
 
 1. Create a Product Search instance
 
-    You need an *Product Search instance*. You can create it from [web console](https://imagesearch.console.aliyun.com/product-search). For more information, you can see the [documents](https://www.alibabacloud.com/help/doc-detail/66569.htm).
+    You need an *Product Search instance*. You can create it from
+    [Product Search console](https://imagesearch.console.aliyun.com/product-search).
+    For more information, please read [this document](https://www.alibabacloud.com/help/doc-detail/66569.htm).
 
     If you want, you can also create an [ECS instance](https://www.alibabacloud.com/help/product/25365.htm).
 
 2. Create an access key
 
-    You need an accessKeyId and an accessKeySecret to access your Product Search instance from local. You can create an access key from [web console](https://usercenter.console.aliyun.com/#/manage/ak).
-    Or you can access the page from the "AccessKey" link at the top-right profile picture on the Alibaba cloud web console.
-
+    You need an accessKeyId and an accessKeySecret to access your Product Search instance. Please follow
+    [this document to obtain an access key id and secret](https://www.alibabacloud.com/help/faq-detail/63482.htm).
 
 ### Local environment requirements
+This application requires the following environment:
+* GNU Linux (CentOS 7.4+ is recommended), MAC OSX or Windows
+* A Java development environment:
+    * [JDK 8+](https://adoptopenjdk.net/)
+    * [Apache Maven](https://maven.apache.org/)
 
-This application requires following environment.
-* A Windows or Linux distribution
-    * CentOS 7.4+ (recommended)
-* Java Runtime Environment
-    * JDK 8 (recommended)
-    * Maven
+You can check your environment with the following commands in a terminal:
+```bash
+# Check that Java JDK is installed
+javac -version
 
-You can check if you installed them by follows.
-```
+# Check that Maven is installed
 mvn -v
-java -version
 ```
 
-You can check what Java version you have and change it by follows.
-```
+You can check what Java version you have and change it with the following commands:
+```bash
 # CentOS
 sudo alternatives --config java
 
@@ -77,7 +81,6 @@ sudo alternatives --config java
 /usr/libexec/java_home -V
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 ```
-
 
 ## How to use
 
