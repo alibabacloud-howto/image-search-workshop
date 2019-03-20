@@ -10,22 +10,27 @@
 6. [Thanks](#thanks)
 
 ## Introduction
+This is a demo workshop that showcases [Image Search](https://www.alibabacloud.com/help/product/66413.htm), an
+Alibaba Cloud image search service. After its completion, you will be able to upload images and try to search
+them by uploading a similar picture.
 
-This is a demo workshop which showcases the [Image Search](https://www.alibabacloud.com/help/product/66413.htm), an Alibaba Cloud
-image search service. After the construction, you can upload an image and try products search.
+This demo is a website compatible with desktop computers and smartphones. It contains two main pages:
+* *Manage objects*
 
-The demo is a website compatible with desktop computers and smartphones. It contains two main pages:
-* *Management objects* page
-    * where users can add/update/delete products in the database.
-* *Home* page
-    * where users can search products that look similar to an uploaded photo.
-    * The picture can come from a JPEG file or directly from a camera when the user views this page on a smartphone.
+    This page allows users to add/update/delete product images in the database.
+    
+* *Home*
 
-The following diagram represents the demo architecture.
-There are two databases: one for storing names & images of registered objects, and one managed by the Image Search instance (it only stores selected image features required for searches). Both databases are synchronized via object UUIDs.
+    This page lets users to search for products that look similar to an uploaded photo (this photo can come from a
+    JPEG file or directly from a camera when the user views this page on a smartphone).
+
+The following diagram represents the demo architecture:
 
 ![image_search_demo_architecture.svg](images/image_search_demo_architecture.svg)
 
+There are two databases: one for storing names & images of registered objects, and one managed by the 
+[Image Search instance](https://www.alibabacloud.com/help/doc-detail/66569.htm) (it only stores selected image
+features required for searches). Both databases are synchronized via object UUIDs.
 
 ## Prerequisite
 
