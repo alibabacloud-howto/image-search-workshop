@@ -8,6 +8,7 @@
 4. [Tips](#tips)
 5. [Online demo page](#online-demo-page)
 6. [Thanks](#thanks)
+7. [Support](#support)
 
 ## Introduction
 This is a demo workshop that showcases [Image Search](https://www.alibabacloud.com/help/product/66413.htm), an
@@ -75,10 +76,10 @@ mvn -v
 
 You can check what Java version you have and change it with the following commands:
 ```bash
-# CentOS
+# If you use CentOS
 sudo alternatives --config java
 
-# Mac
+# If you use Mac OSX
 /usr/libexec/java_home -V
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 ```
@@ -169,8 +170,8 @@ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 
 ## Tips
 After many searches you will find that the results are not always meaningful. For example you will get 20 results even
-if you search with a picture of an object that doesn't exist in the database (in fact, the value "20" is hardcoded in
-the demo source code). This is a limitation of this API, and there is no simple solution. The absolute value of the
+if you search with a picture of an object type that doesn't exist in the database (in fact, the value "20" is hardcoded
+in the demo source code). This is a limitation of this API, and there is no simple solution. The absolute value of the
 score doesn't help (unless you search with the exact same picture as a registered object), only its relative value
 can be used for sorting results.
 
@@ -204,3 +205,6 @@ This application uses the following libraries/frameworks/tools:
   * [Mockito](http://site.mockito.org/)
 * Build
   * [RPM Maven Plugin](https://www.mojohaus.org/rpm-maven-plugin/)
+
+## Support
+Don't hesitate to [contact us](mailto:projectdelivery@alibabacloud.com) if you have questions or remarks.
