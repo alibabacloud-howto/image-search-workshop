@@ -45,16 +45,17 @@ Before running the application, you first need to create a
 
 1. Create a Product Search instance
 
-    You need an *Product Search instance*. You can create it from
+    You need an *Product Search instance*. You can create it from the
     [Product Search console](https://imagesearch.console.aliyun.com/product-search).
     For more information, please read [this document](https://www.alibabacloud.com/help/doc-detail/66569.htm).
-
-    If you want, you can also create an [ECS instance](https://www.alibabacloud.com/help/product/25365.htm).
 
 2. Create an access key
 
     You need an accessKeyId and an accessKeySecret to access your Product Search instance. Please follow
     [this document to obtain an access key id and secret](https://www.alibabacloud.com/help/faq-detail/63482.htm).
+
+3. If you want to run this demo in Alibaba Cloud, you can also create an
+    [ECS instance](https://www.alibabacloud.com/help/product/25365.htm).
 
 ### Local environment requirements
 This application requires the following environment:
