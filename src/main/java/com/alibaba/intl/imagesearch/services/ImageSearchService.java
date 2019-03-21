@@ -16,10 +16,9 @@ package com.alibaba.intl.imagesearch.services;
 
 import com.alibaba.intl.imagesearch.exceptions.InvalidConfigurationException;
 import com.alibaba.intl.imagesearch.model.Configuration;
-import com.alibaba.intl.imagesearch.model.ObjectCategory;
 import com.alibaba.intl.imagesearch.model.ObjectImageType;
-import com.alibaba.intl.imagesearch.model.dto.ImageSearchResponse;
 import com.alibaba.intl.imagesearch.model.dto.ImageRegion;
+import com.alibaba.intl.imagesearch.model.dto.ImageSearchResponse;
 
 /**
  * Provide services from the image search API.
@@ -33,10 +32,9 @@ public interface ImageSearchService {
      *
      * @param imageData Image data in JPEG or PNG format.
      * @param imageType Image format.
-     * @param category  Product category.
      * @param uuid      Unique identifier of the image.
      */
-    void register(byte[] imageData, ObjectImageType imageType, ObjectCategory category, String uuid);
+    void register(byte[] imageData, ObjectImageType imageType, String uuid);
 
     /**
      * Un-register an image from the search instance.

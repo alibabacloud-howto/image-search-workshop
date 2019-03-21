@@ -16,7 +16,6 @@ package com.alibaba.intl.imagesearch.services.impl;
 
 import com.alibaba.intl.imagesearch.exceptions.InvalidConfigurationException;
 import com.alibaba.intl.imagesearch.model.Configuration;
-import com.alibaba.intl.imagesearch.model.ObjectCategory;
 import com.alibaba.intl.imagesearch.model.ObjectImageType;
 import com.alibaba.intl.imagesearch.model.dto.ImageRegion;
 import com.alibaba.intl.imagesearch.model.dto.ImageSearchAuction;
@@ -86,13 +85,12 @@ public class ImageSearchServiceImpl implements ImageSearchService {
     }
 
     @Override
-    public void register(byte[] imageData, ObjectImageType imageType, ObjectCategory category, String uuid) {
+    public void register(byte[] imageData, ObjectImageType imageType, String uuid) {
         Configuration configuration = configurationService.load();
 
         // Prepare the request
         AddItemRequest request = new AddItemRequest();
         request.setInstanceName(configuration.getImageSearchInstanceName());
-        request.setCatId(category.getId());
         request.setItemId(uuid);
         if (configuration.getImageSearchNamespace() != null) {
             request.setStrAttr(configuration.getImageSearchNamespace()); // Allow us to re-use the same Image Search instance for several environments
@@ -159,7 +157,6 @@ public class ImageSearchServiceImpl implements ImageSearchService {
         request.setStart(0);
         request.setNum(20);
         request.setSearchPicture(imageData);
-//        request.setCatId(ObjectCategory.FURNITURE.getId()); // TODO Allow the user to choose a category if he wants
 
         if (configuration.getImageSearchNamespace() != null) {
             request.setFilterClause("str_attr=\"" + configuration.getImageSearchNamespace() + "\""); // Allow us to share the same instance for multiple environments
@@ -167,9 +164,9 @@ public class ImageSearchServiceImpl implements ImageSearchService {
         //If the object region is null then do crop search.
         if (objectRegion != null) {
             request.setCrop(true);
-            request.setRegion(new StringBuffer().append(objectRegion.getX()).append(",")
-                    .append(objectRegion.getWidth() + objectRegion.getX()).append(",").append(objectRegion.getY())
-                    .append(",").append(objectRegion.getHeight() + objectRegion.getY()).toString());
+            request.setRegion(objectRegion.getX() + "," +
+                    (objectRegion.getWidth() + objectRegion.getX()) + "," + objectRegion.getY() +
+                    "," + (objectRegion.getHeight() + objectRegion.getY()));
         }
 
         if (!request.buildPostContent()) {
@@ -201,7 +198,10 @@ public class ImageSearchServiceImpl implements ImageSearchService {
             rawImageSearchResponseJson = "";
         }
 
-        return new ImageSearchResponse(buildImageSearchAuctions(response), rawImageSearchResponseJson, obtainImageRegion(response));
+        return new ImageSearchResponse(
+                buildImageSearchAuctions(response),
+                rawImageSearchResponseJson,
+                obtainImageRegion(response));
     }
 
     private ImageRegion obtainImageRegion(SearchItemResponse response) {
@@ -262,7 +262,6 @@ public class ImageSearchServiceImpl implements ImageSearchService {
         request.setStart(0);
         request.setNum(1);
         request.setSearchPicture(imageForConfigurationCheckData);
-//        request.setCatId(ObjectCategory.OTHERS.getId());
         if (configuration.getImageSearchNamespace() != null) {
             request.setFilterClause("str_attr=\"" + configuration.getImageSearchNamespace() + "\""); // Allow us to share the same instance for multiple environments
         }
