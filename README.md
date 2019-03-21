@@ -94,7 +94,7 @@ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
     # Clone the project
     git clone https://github.com/alibabacloud-howto/image-search-workshop.git
 
-    # Install and Build the project
+    # Install and build the project
     mvn clean install
 
     # Run the project
@@ -103,7 +103,7 @@ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 
     Of course, you can use an IDE (e.g. IntelliJ IDEA) to import, build and run this project.
     
-    > Note: you can use the following command to only build the project (skip tests):
+    > Note: you can use the following command if you want to only build the project (skip tests):
     ```bash
     mvn package -Dmaven.test.skip=true
     ```
@@ -111,11 +111,11 @@ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 2. Try the demo
 
     1. Configure the demo
-        * Open your web browser and access to "http://localhost:8080/".
+        * Open your web browser and go to "http://localhost:8080/".
         * If this is the first time you use the application, you will be redirected to the configuration page.
         * Enter your access key and "Product Search instance" details (you can ignore "OSS Base image URL").
 
-    2. Access to the *Manage objects* page
+    2. Go to the *Manage objects* page
         * You can add/update/delete products here.
         * It displays all the sample products registered in the database.
 
@@ -127,25 +127,21 @@ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 1. Create a RPM package
 
     If you plan to install this demo on a RPM-based Linux distribution, you can type the following command:
-    ```
+    ```bash
     mvn rpm:rpm
     ```
 
     This generates the package "target/rpm/web-image-search-engine/RPMS/noarch/web-image-search-engine-*.noarch.rpm".
-    The RPM contains the fat JAR and a Systemd script. It allows users to easily execute the server when the machine
-    starts. It also automatically restarts the application after a crash.
-
-    If you just want to run the fat JAR, open a terminal and run the command:
-    ```
-    java -jar web-image-search-engine-latest.jar
-    ```
-
-    This starts the server on the port 8080 and outputs the logs in the console.
+    The RPM contains a [fat JAR](https://stackoverflow.com/questions/19150811/what-is-a-fat-jar) and a
+    [Systemd](https://freedesktop.org/wiki/Software/systemd/) script. It allows users to easily execute the web server
+    when the machine starts. It also automatically restarts the application after a crash.
 
 2. Install the RPM package
 
-    If you are using a RPM-based Linux distribution, such as CentOS 7.4+, you can install the RPM with the following commands:
-    ```
+    If you are using a RPM-based Linux distribution, such as CentOS 7.4+, you can install the RPM with the
+    following commands:
+    
+    ```bash
     sudo yum -y update
     sudo yum -y install path/to/web-image-search-engine-latest.noarch.rpm
     ```
@@ -153,12 +149,12 @@ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 3. Execute the service
 
     You can start the server with the following command:
-    ```
+    ```bash
     sudo systemctl start web-image-search-engine.service
     ```
 
     You can check the logs by running the following command:
-    ```
+    ```bash
     sudo journalctl --unit=web-image-search-engine
     ```
 
@@ -166,13 +162,11 @@ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
     such as [Nginx](https://www.linode.com/docs/development/java/how-to-deploy-spring-boot-applications-nginx-ubuntu-16-04/#reverse-proxy).
 
     If you want to automatically run the server when the machine starts, enter the following command:
-    ```
+    ```bash
     sudo systemctl enable web-image-search-engine.service
     ```
 
-
 ## Tips
-
 After many searches you will find that the results are not always meaningful. For example you will get 20 results even
 if you search with a picture of an object that doesn't exist in the database (in fact, the value "20" is hardcoded in
 the demo source code). This is a limitation of this API, and there is no simple solution. The absolute value of the
@@ -181,12 +175,12 @@ can be used for sorting results.
 
 There are few solutions for this problem:
 * Have a huge database of images, like [Taobao](https://www.taobao.com/).
-* Teach the Image Search API to recognize bad results: for example if the customer only sells furniture, then non-furniture objects should also be registered in the database and marked as "BAD", like this the program can filter the Image Search results by removing the BAD objects.
-
+* Teach the Image Search API to recognize bad results: for example if the customer only sells furniture, then
+non-furniture objects should also be registered in the database and marked as "BAD", like this the program can filter
+the Image Search results by removing the BAD objects.
 
 ## Online demo page
-[http://imagesearch.abcdemo.cc/](http://imagesearch.abcdemo.cc/)
-
+You can try the demo with the following URL: [http://imagesearch.abcdemo.cc/](http://imagesearch.abcdemo.cc/)
 
 ## Thanks
 This application uses the following libraries/frameworks/tools:
@@ -196,6 +190,8 @@ This application uses the following libraries/frameworks/tools:
   * [Hibernate](http://hibernate.org/)
   * [Apache Commons IO](https://commons.apache.org/proper/commons-io/)
   * [Apache Commons Lang](https://commons.apache.org/proper/commons-lang/)
+  * [Apache HttpComponents](http://hc.apache.org/)
+  * [Gson](https://github.com/google/gson)
   * [Alibaba Cloud SDK for Java](https://github.com/aliyun/aliyun-openapi-java-sdk)
 * Frontend
   * [Bootstrap](https://getbootstrap.com/)
@@ -204,10 +200,6 @@ This application uses the following libraries/frameworks/tools:
   * [Open Iconic](https://useiconic.com/open/)
   * [Draggabilly](https://draggabilly.desandro.com/)
 * Backend testing
-  * [Maven Surefire Plugin](http://maven.apache.org/surefire/maven-surefire-plugin/)
   * [Mockito](http://site.mockito.org/)
-  * [JaCoCo](https://www.jacoco.org/)
 * Build
-  * [Jenkins](https://jenkins.io/)
-  * [SonarQube](https://www.sonarqube.org/)
   * [RPM Maven Plugin](https://www.mojohaus.org/rpm-maven-plugin/)
