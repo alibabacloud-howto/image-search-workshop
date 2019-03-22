@@ -18,10 +18,7 @@ import com.alibaba.intl.imagesearch.AbstractTest;
 import com.alibaba.intl.imagesearch.model.ObjectCategory;
 import com.alibaba.intl.imagesearch.model.ObjectImageType;
 import com.alibaba.intl.imagesearch.model.RecognizableObject;
-import com.alibaba.intl.imagesearch.model.dto.ImageRegion;
-import com.alibaba.intl.imagesearch.model.dto.ImageSearchAuction;
-import com.alibaba.intl.imagesearch.model.dto.ImageSearchResponse;
-import com.alibaba.intl.imagesearch.model.dto.ImageStoreType;
+import com.alibaba.intl.imagesearch.model.dto.*;
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -92,20 +89,20 @@ public class RecognizableObjectServiceTest extends AbstractTest {
         RecognizableObject object = new RecognizableObject(uuid, "testObjectLifecycleImage", ObjectCategory.OTHERS, ObjectImageType.JPEG, imageData, imageData);
         RecognizableObject createdObject = recognizableObjectService.create(object);
         assertEquals(createdObject, object);
-        verify(mockImageSearchService).register(imageData, ObjectImageType.JPEG, ObjectCategory.OTHERS, uuid);
+        verify(mockImageSearchService).register(imageData, ObjectImageType.JPEG, uuid);
 
         // Find the object
         ImageRegion objectRegion = new ImageRegion(0, 0, 100, 100);
-        List<ImageSearchAuction> imageSearchAuctionList = new ArrayList<ImageSearchAuction>();
+        List<ImageSearchAuction> imageSearchAuctionList = new ArrayList<>();
         imageSearchAuctionList.add(new ImageSearchAuction("2490233", ObjectCategory.OTHERS.getId(), "342323901.png", ImageStoreType.OSS, 4.2F, null));
         imageSearchAuctionList.add(new ImageSearchAuction(object.getUuid(), ObjectCategory.OTHERS.getId(), object.getName(), ImageStoreType.DATABASE, 4.2F, null));
         when(mockImageSearchService.findAllBySimilarImage(imageData, objectRegion)).thenReturn(
                 new ImageSearchResponse(imageSearchAuctionList, "fake-json", null));
 
-        ImageSearchResponse imageSearchResponse = recognizableObjectService.findAllBySimilarImage(imageData, objectRegion);
-        assertEquals(imageSearchAuctionList.size(), imageSearchResponse.getImageSearchAuctions().size());
+        ObjectSearchResponse objectSearchResponse = recognizableObjectService.findAllBySimilarImage(imageData, objectRegion);
+        assertEquals(imageSearchAuctionList.size(), objectSearchResponse.getAuctions().size());
 
-        ImageSearchAuction objectWithScore = imageSearchResponse.getImageSearchAuctions().stream()
+        ImageSearchAuction objectWithScore = objectSearchResponse.getAuctions().stream()
                 .filter(ows -> ows.getItemId().equals(object.getUuid()))
                 .findFirst()
                 .orElse(null);
@@ -115,18 +112,11 @@ public class RecognizableObjectServiceTest extends AbstractTest {
         assertEquals(object.getName(), objectWithScore.getPicName());
         assertEquals(object.getCategory().getId(), objectWithScore.getCatId());
 
-        // Update the object but keep the same category, and check the image search instance is NOT updated
+        // Update the object
         reset(mockImageSearchService);
         object.setName("testObjectLifecycleImage_updated");
         RecognizableObject updatedObject = recognizableObjectService.update(object);
         assertEquals(updatedObject, object);
-        verify(mockImageSearchService, times(0)).register(any(), any(), any(), anyString());
-
-        // Update the object again by changing the category, and check the image search instance is updated
-        object.setCategory(ObjectCategory.BOTTLE_DRINKS);
-        updatedObject = recognizableObjectService.update(object);
-        assertEquals(updatedObject, object);
-        verify(mockImageSearchService, times(1)).register(imageData, ObjectImageType.JPEG, ObjectCategory.BOTTLE_DRINKS, uuid);
 
         // Delete the object
         recognizableObjectService.delete(object.getUuid());

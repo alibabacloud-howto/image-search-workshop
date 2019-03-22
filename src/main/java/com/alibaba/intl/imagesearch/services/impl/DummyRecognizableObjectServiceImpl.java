@@ -17,10 +17,10 @@ package com.alibaba.intl.imagesearch.services.impl;
 import com.alibaba.intl.imagesearch.model.ObjectCategory;
 import com.alibaba.intl.imagesearch.model.ObjectImageType;
 import com.alibaba.intl.imagesearch.model.RecognizableObject;
+import com.alibaba.intl.imagesearch.model.dto.AugmentedAuction;
 import com.alibaba.intl.imagesearch.model.dto.ImageRegion;
-import com.alibaba.intl.imagesearch.model.dto.ImageSearchAuction;
-import com.alibaba.intl.imagesearch.model.dto.ImageSearchResponse;
 import com.alibaba.intl.imagesearch.model.dto.ImageStoreType;
+import com.alibaba.intl.imagesearch.model.dto.ObjectSearchResponse;
 import com.alibaba.intl.imagesearch.services.RecognizableObjectService;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -111,9 +111,9 @@ public class DummyRecognizableObjectServiceImpl implements RecognizableObjectSer
     }
 
     @Override
-    public ImageSearchResponse findAllBySimilarImage(byte[] imageData, ImageRegion objectRegion) {
-        return new ImageSearchResponse(objects.stream()
-                .map(o -> new ImageSearchAuction(o.getUuid(), o.getCategory().getId(), o.getName(), ImageStoreType.DATABASE, 4.2F, null))
+    public ObjectSearchResponse findAllBySimilarImage(byte[] imageData, ImageRegion objectRegion) {
+        return new ObjectSearchResponse(objects.stream()
+                .map(o -> new AugmentedAuction(o.getUuid(), o.getCategory().getId(), o.getName(), ImageStoreType.DATABASE, 4.2F, null, o))
                 .collect(Collectors.toList()), "", new ImageRegion(0, 0, 100, 100));
     }
 

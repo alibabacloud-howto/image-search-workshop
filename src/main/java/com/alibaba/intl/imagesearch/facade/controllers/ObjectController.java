@@ -19,19 +19,18 @@ import com.alibaba.intl.imagesearch.facade.dto.ObjectSearchResponseDTO;
 import com.alibaba.intl.imagesearch.facade.dto.ObjectWithScoreDTO;
 import com.alibaba.intl.imagesearch.facade.exceptions.InvalidImageException;
 import com.alibaba.intl.imagesearch.facade.exceptions.InvalidObjectException;
-import com.alibaba.intl.imagesearch.model.Configuration;
 import com.alibaba.intl.imagesearch.model.ObjectCategory;
 import com.alibaba.intl.imagesearch.model.ObjectImageType;
 import com.alibaba.intl.imagesearch.model.RecognizableObject;
+import com.alibaba.intl.imagesearch.model.dto.AugmentedAuction;
 import com.alibaba.intl.imagesearch.model.dto.ImageRegion;
-import com.alibaba.intl.imagesearch.model.dto.ImageSearchAuction;
-import com.alibaba.intl.imagesearch.model.dto.ImageSearchResponse;
 import com.alibaba.intl.imagesearch.model.dto.ImageStoreType;
+import com.alibaba.intl.imagesearch.model.dto.ObjectSearchResponse;
 import com.alibaba.intl.imagesearch.services.ConfigurationService;
 import com.alibaba.intl.imagesearch.services.RecognizableObjectService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -54,16 +53,15 @@ public class ObjectController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ObjectController.class);
     private static final String UUID_REGEX = "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$";
-    private static final String NAME_REGEX = "^[a-zA-Z0-9 \\.\\-_\\(\\)]+$";
+    private static final String NAME_REGEX = "^[a-zA-Z0-9 .\\-_()]+$";
 
+    private final ConfigurationService configurationService;
     private final RecognizableObjectService recognizableObjectService;
     private final Pattern UUID_PATTERN = Pattern.compile(UUID_REGEX);
     private final Pattern NAME_PATTERN = Pattern.compile(NAME_REGEX);
 
-    @Autowired
-    private ConfigurationService configurationService;
-
-    public ObjectController(RecognizableObjectService recognizableObjectService) {
+    public ObjectController(ConfigurationService configurationService, RecognizableObjectService recognizableObjectService) {
+        this.configurationService = configurationService;
         this.recognizableObjectService = recognizableObjectService;
     }
 
@@ -94,7 +92,7 @@ public class ObjectController {
 
     /**
      * Update an object in the database.
-     * Note: the {@link ObjectDTO#uuid} and {@link ObjectDTO#imageUrl} cannot be modified.
+     * Note: the uuid and imageUrl cannot be modified.
      *
      * @return Updated object.
      */
@@ -169,7 +167,6 @@ public class ObjectController {
      * @param imageFile    Uploaded image file.
      * @param objectRegion Updated crop image region
      * @return Result page name.
-     * @throws InvalidImageException
      */
     @RequestMapping(value = "/objects/findAllBySimilarImage", method = RequestMethod.POST)
     public ObjectSearchResponseDTO findAllBySimilarImage(@RequestParam("imageFile") MultipartFile imageFile, @RequestPart(name = "objectRegion", required = false) ImageRegion objectRegion)
@@ -177,13 +174,16 @@ public class ObjectController {
         LOGGER.info("Find all objects similar to the given image (name = '{}', size = {}kB).",
                 imageFile.getOriginalFilename(), imageFile.getSize() / 1024);
 
-        ImageSearchResponse imageSearchResponse = recognizableObjectService.findAllBySimilarImage(readImageFile(imageFile), objectRegion);
+        ObjectSearchResponse response = recognizableObjectService.findAllBySimilarImage(readImageFile(imageFile), objectRegion);
 
-        List<ObjectWithScoreDTO> objectWithScores = imageSearchResponse.getImageSearchAuctions().stream()
-                .map(isu -> new ObjectWithScoreDTO(convertModelObjectToDTO(isu), isu.getSimilarityScore()))
+        boolean hasResultFromOSS = response.getAuctions().stream().anyMatch(it -> it.getImageStoreType() == ImageStoreType.OSS);
+        String ossBaseUrl = hasResultFromOSS ? configurationService.load().getOssBaseUrl() : "";
+
+        List<ObjectWithScoreDTO> objectWithScores = response.getAuctions().stream()
+                .map(auction -> new ObjectWithScoreDTO(convertModelObjectToDTO(auction, ossBaseUrl), auction.getSimilarityScore()))
                 .collect(Collectors.toList());
 
-        return new ObjectSearchResponseDTO(objectWithScores, imageSearchResponse.getRawImageSearchResponseJson(), imageSearchResponse.getObjectRegion());
+        return new ObjectSearchResponseDTO(objectWithScores, response.getRawImageSearchResponseJson(), response.getObjectRegion());
     }
 
     /**
@@ -198,15 +198,7 @@ public class ObjectController {
         validateUuid(uuid);
 
         RecognizableObject object = recognizableObjectService.findByUuid(uuid);
-        byte[] imageData = object.getImageData();
-        if (imageData == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .contentType(object.getImageType() == ObjectImageType.JPEG ? MediaType.IMAGE_JPEG : MediaType.IMAGE_PNG)
-                    .body(imageData);
-        }
+        return wrapImageDataIntoResponseEntity(object.getImageData(), object.getImageType());
     }
 
     /**
@@ -221,15 +213,7 @@ public class ObjectController {
         validateUuid(uuid);
 
         RecognizableObject object = recognizableObjectService.findByUuid(uuid);
-        byte[] thumbnailData = object.getThumbnailData();
-        if (thumbnailData == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } else {
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .contentType(object.getImageType() == ObjectImageType.JPEG ? MediaType.IMAGE_JPEG : MediaType.IMAGE_PNG)
-                    .body(thumbnailData);
-        }
+        return wrapImageDataIntoResponseEntity(object.getThumbnailData(), object.getImageType());
     }
 
     private void validateObject(ObjectDTO object) throws InvalidObjectException {
@@ -262,6 +246,17 @@ public class ObjectController {
         }
     }
 
+    private ResponseEntity<byte[]> wrapImageDataIntoResponseEntity(byte[] imageData, ObjectImageType imageType) {
+        if (imageData == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .contentType(imageType == ObjectImageType.JPEG ? MediaType.IMAGE_JPEG : MediaType.IMAGE_PNG)
+                    .body(imageData);
+        }
+    }
+
     private RecognizableObject convertObjectDTOToModel(ObjectDTO objectDTO) {
         return new RecognizableObject(
                 objectDTO.getUuid(),
@@ -280,20 +275,28 @@ public class ObjectController {
                 "/objects/" + object.getUuid() + "/thumbnail");
     }
 
-    private ObjectDTO convertModelObjectToDTO(ImageSearchAuction object) {
-        Configuration configuration = configurationService.load();
+    private ObjectDTO convertModelObjectToDTO(AugmentedAuction auction, String ossBaseUrl) {
+        String imageUrl = "/objects/" + auction.getItemId() + "/image";
+        String thumbnailUrl = "/objects/" + auction.getItemId() + "/thumbnail";
+        String uuid = auction.getItemId();
+        if (auction.getImageStoreType() == ImageStoreType.OSS) {
+            imageUrl = (StringUtils.isBlank(ossBaseUrl) ? "" : ossBaseUrl) + "/" + auction.getPicName();
+            thumbnailUrl = imageUrl;
+            uuid = auction.getItemId() + "_" + auction.getPicName();
+        }
 
-        String imageUrl = object.getImageStoreType() == ImageStoreType.DATABASE ? "/objects/" + object.getItemId() + "/image"
-                : configuration != null ? configuration.getOssBaseUrl() : "" + "/" + object.getPicName();
-        String thumbnailUrl = object.getImageStoreType() == ImageStoreType.DATABASE ? "/objects/" + object.getItemId() + "/thumbnail"
-                : configuration != null ? configuration.getOssBaseUrl() : "" + "/" + object.getPicName();
-        String uuid = object.getImageStoreType() == ImageStoreType.DATABASE ? object.getItemId() : object.getItemId() + "_" + object.getPicName();
+        String name = auction.getPicName();
+        ObjectImageType imageType = null;
+        if (auction.getRecognizableObject() != null) {
+            name = auction.getRecognizableObject().getName();
+            imageType = auction.getRecognizableObject().getImageType();
+        }
 
         return new ObjectDTO(
                 uuid,
-                object.getPicName(),
-                ObjectCategory.findById(object.getCatId()),
-                null,
+                name,
+                ObjectCategory.findById(auction.getCatId()),
+                imageType,
                 imageUrl,
                 thumbnailUrl);
     }

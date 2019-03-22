@@ -15,8 +15,8 @@
 package com.alibaba.intl.imagesearch.services;
 
 import com.alibaba.intl.imagesearch.model.RecognizableObject;
-import com.alibaba.intl.imagesearch.model.dto.ImageSearchResponse;
 import com.alibaba.intl.imagesearch.model.dto.ImageRegion;
+import com.alibaba.intl.imagesearch.model.dto.ObjectSearchResponse;
 
 import java.util.List;
 
@@ -65,9 +65,7 @@ public interface RecognizableObjectService {
     /**
      * Find all objects that match the given image.
      *
-     * @param imageData
-     * @param objectRegion
      * @return Found objects with their score.
      */
-    ImageSearchResponse findAllBySimilarImage(byte[] imageData, ImageRegion objectRegion);
+    ObjectSearchResponse findAllBySimilarImage(byte[] imageData, ImageRegion objectRegion);
 }

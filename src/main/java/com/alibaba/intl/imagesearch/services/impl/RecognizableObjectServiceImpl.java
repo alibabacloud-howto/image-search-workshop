@@ -15,8 +15,7 @@
 package com.alibaba.intl.imagesearch.services.impl;
 
 import com.alibaba.intl.imagesearch.model.RecognizableObject;
-import com.alibaba.intl.imagesearch.model.dto.ImageRegion;
-import com.alibaba.intl.imagesearch.model.dto.ImageSearchResponse;
+import com.alibaba.intl.imagesearch.model.dto.*;
 import com.alibaba.intl.imagesearch.repositories.RecognizableObjectRepository;
 import com.alibaba.intl.imagesearch.services.ImageSearchService;
 import com.alibaba.intl.imagesearch.services.RecognizableObjectService;
@@ -24,6 +23,9 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Default implementation of {@link RecognizableObjectService} based on Alibaba Cloud SDK.
@@ -37,7 +39,8 @@ public class RecognizableObjectServiceImpl implements RecognizableObjectService 
     private final ImageSearchService imageSearchService;
     private final RecognizableObjectRepository recognizableObjectRepository;
 
-    public RecognizableObjectServiceImpl(ImageSearchService imageSearchService, RecognizableObjectRepository recognizableObjectRepository) {
+    public RecognizableObjectServiceImpl(ImageSearchService imageSearchService,
+                                         RecognizableObjectRepository recognizableObjectRepository) {
         this.imageSearchService = imageSearchService;
         this.recognizableObjectRepository = recognizableObjectRepository;
     }
@@ -45,7 +48,7 @@ public class RecognizableObjectServiceImpl implements RecognizableObjectService 
     @Override
     public RecognizableObject create(RecognizableObject object) {
         // Add the new object to the Image Search API
-        imageSearchService.register(object.getImageData(), object.getImageType(), object.getCategory(), object.getUuid());
+        imageSearchService.register(object.getImageData(), object.getImageType(), object.getUuid());
 
         // Save the object
         return recognizableObjectRepository.save(object);
@@ -66,15 +69,12 @@ public class RecognizableObjectServiceImpl implements RecognizableObjectService 
                     ", updated object image type = " + object.getImageType() + ").");
         }
 
+        // Prevent the image data to be modified
+        object.setImageData(existingObject.getImageData());
+        object.setThumbnailData(existingObject.getThumbnailData());
+
         // Update the object
-        RecognizableObject savedObject = recognizableObjectRepository.save(object);
-
-        // Refresh the object into the Image Search API if the category has changed
-        if (savedObject.getCategory() != existingObject.getCategory()) {
-            imageSearchService.register(savedObject.getImageData(), savedObject.getImageType(), savedObject.getCategory(), savedObject.getUuid());
-        }
-
-        return object;
+        return recognizableObjectRepository.save(object);
     }
 
     @Override
@@ -99,9 +99,25 @@ public class RecognizableObjectServiceImpl implements RecognizableObjectService 
     }
 
     @Override
-    public ImageSearchResponse findAllBySimilarImage(byte[] imageData, ImageRegion objectRegion) {
+    public ObjectSearchResponse findAllBySimilarImage(byte[] imageData, ImageRegion objectRegion) {
         // Search for similar images
-        return imageSearchService.findAllBySimilarImage(imageData, objectRegion);
+        ImageSearchResponse response = imageSearchService.findAllBySimilarImage(imageData, objectRegion);
+
+        // Find objects from the database that match with the results
+        List<String> objectIds = response.getImageSearchAuctions().stream()
+                .map(ImageSearchAuction::getItemId)
+                .collect(Collectors.toList());
+        List<RecognizableObject> objects = recognizableObjectRepository.findAllById(objectIds);
+
+        // Merge auctions and found objects
+        Map<String, RecognizableObject> objectByUuid = objects.stream()
+                .collect(Collectors.toMap(RecognizableObject::getUuid, Function.identity()));
+
+        List<AugmentedAuction> auctions = response.getImageSearchAuctions().stream()
+                .map(auction -> new AugmentedAuction(auction, objectByUuid.get(auction.getItemId())))
+                .collect(Collectors.toList());
+
+        return new ObjectSearchResponse(auctions, response.getRawImageSearchResponseJson(), response.getObjectRegion());
     }
 
 }
