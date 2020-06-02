@@ -5,7 +5,7 @@ After=network.target[Service]
 
 [Service]
 User=webimagesearchengine
-ExecStart=/usr/bin/java -Xmx1024m -jar /opt/web-image-search-engine/web-image-search-engine.jar
+ExecStart=/usr/bin/java -Xmx2g -jar /opt/web-image-search-engine/web-image-search-engine.jar
 SuccessExitStatus=143
 TimeoutStopSec=10
 Restart=on-failure
