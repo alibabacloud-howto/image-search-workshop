@@ -14,7 +14,7 @@
     <name>web-image-search-engine</name>
 
     <properties>
-        <apache-commons-io.version>2.6</apache-commons-io.version>
+        <apache-commons-io.version>2.7</apache-commons-io.version>
         <apache-lang.version>3.8.1</apache-lang.version>
         <mockito.version>1.10.19</mockito.version>
         <hibernate-validator.version>6.0.15.Final</hibernate-validator.version>
